@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Campus Lost & Found</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <h1>Campus Lost & Found</h1>
+    <div class="user-controls">
+      <button id="loginBtn" class="btn">Sign in with Google</button>
+      <div id="userInfo" class="user-info hidden">
+        <img id="userPhoto" alt="avatar" />
+        <span id="userEmail"></span>
+        <button id="logoutBtn" class="btn ghost">Logout</button>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+    <section class="form-card">
+      <h2>Report an Item</h2>
+      <form id="itemForm">
+        <div class="row">
+          <label>Item Name <input id="itemName" required /></label>
+          <label>Status
+            <select id="status">
+              <option value="lost">Lost</option>
+              <option value="found">Found</option>
+            </select>
+          </label>
+        </div>
+        <label>Description
+          <textarea id="description" rows="3" placeholder="Add details like color, brand..."></textarea>
+        </label>
+
+        <div class="row">
+          <label>Location <input id="location" required /></label>
+          <label>Contact Info <input id="contactInfo" required /></label>
+        </div>
+        <div class="row actions">
+          <button type="submit" class="btn primary">Submit Item</button>
+          <button type="button" id="clearBtn" class="btn ghost">Clear</button>
+        </div>
+      </form>
+    </section>
+    <section class="filters-card">
+      <h2>Items</h2>
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="lost">Lost</button>
+        <button class="filter-btn" data-filter="found">Found</button>
+        <button class="filter-btn" data-filter="returned">Returned</button>
+      </div>
+      <div id="itemsList" class="cards-grid"></div>
+    </section>
+  </main>
+  <div id="toast" class="toast hidden"></div>
+  <script>
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "SENDER_ID",
+      appId: "APP_ID"
+    };
+    window._FIREBASE_CONFIG = firebaseConfig;
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
